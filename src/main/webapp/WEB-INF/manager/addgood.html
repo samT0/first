@@ -1,0 +1,49 @@
+<style type="text/css">
+.good{
+margin:0 auto;
+width: 600px;
+}
+.good form {
+width: 500px;
+padding-top: 20px;
+}
+.good form ul{
+width: 500px;
+list-style: none;
+}
+.good form ul li{
+width: 400px;
+margin-top: 10px;
+}
+.good form ul li label{
+display: inline-block;
+text-top:right;
+width: 100px
+}
+
+
+
+</style>
+
+<div class="good">
+<form id="addgood" method="post" enctype="multipart/form-data">
+	<ul>
+		<li><label>aaaa</label>
+		<select type="text" style="width: 100px;" id="t_parent"></select>
+		<select class="easyui-combobox" type="text" style="width:100px;" id="t_id"
+			data-options="valueField:'t_id',textField:'t_name'" ></select>
+		</li>
+		<li><label>bbbbb</label><input type="text" name="g_name"></li>
+		<li><label>ccccc</label><input type="text" name="g_mark"></li>
+		<li><label>dddd</label><input type="text" name="g_price"></li>
+		<li><label>eeeee</label><input type="file" name="g_temp1"></li>
+		<li><label></label><a class="easyui-linkbutton tbn_add" style="width: 80px"
+		 href="javascript:void(0)">添加</a></li>
+	</ul>
+</form>
+</div> 
+<script type="text/javascript">
+
+
+
+</script>

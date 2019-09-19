@@ -1,0 +1,56 @@
+<table id="show_good">姓名:<input type="text" name="aname"/></table>
+
+<script type="text/javascript">
+$('#show_good').datagrid({
+ 	url:'good.action',
+ 	queryParams:{op:'find'},//查询参数    	传入参数，默认查询可以用账号信息
+ 	pagination:true,//分页工具栏
+ 	singleSelect:true,//只能选中一行
+ 	pageSize:4,//初始化页面尺寸
+ 	pageList:[1,2,4,8,10], //初始化页面尺寸的选择列表
+ 	toolbar: [{
+		iconCls: 'icon-add',
+		handler: function(){alert('edit')}
+	},'-',{
+		iconCls: 'icon-edit',
+		handler: function(){alert('help')}
+	},'-',{
+		iconCls: 'icon-search',
+		handler: function(){
+			//点击当前图标查询禁用的管理员
+			$('#show_good').datagrid('load',{
+				op: 'find'});
+		}
+	}],
+    columns:[[
+		{field:'aid',title:'编号',width:200,align:'center'},
+		{field:'g_name',title:'姓名',width:200,align:'center'},
+		{field:'g_mark',title:'联系方式',width:200,align:'center'},
+		{field:'a_option',title:'操作',width:200,align:'center',
+			formatter: function(value,row,index){
+				return '<a href="javascript:updateGood('+row.g_id+')">修改</a>';}
+		}
+    ]]
+});
+
+
+/*修改管理员状态操作
+function updateState(aid){
+	$.get("admin.action",{op:'update',a_id:aid},function(data){
+		if(data==1){
+			//弹框提示
+			$.messager.show({
+				title:'温馨提示',
+				msg:'权限修改成功',
+				timeout:4000,
+				showType:'slide'
+			});
+			//重新加载表格
+			$('#show_admin').datagrid('reload');
+		}else{
+			$.messager.alert('错误提示','修改失败');
+		}
+	});
+}
+*/
+</script>

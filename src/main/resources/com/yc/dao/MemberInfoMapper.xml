@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- 对应接口的全路径 -->
+ <mapper namespace="com.yc.dao.IMemberInfoMapper">
+ 	<!-- id值必须跟这个接口里面的方法名一致 -->
+ 	<insert id="add" parameterType="com.yc.po.MemberInfo">
+ 		insert into memberinfo VALUES(null,#{nickname},MD5(#{pwd}),#{tel},#{email},'',now(),1) 
+ 	</insert>
+ 	
+ 	<select id="login" parameterType="MemberInfo" resultType="MemberInfo">
+ 		select mno,nickname,realName,tel,email,photo,date_format(regDate,'%Y-%m-%d %H:%i:%s') regDate,status from memberInfo where (nickname=#{nickname})
+ 	</select>
+ 	
+ 	
+ </mapper>

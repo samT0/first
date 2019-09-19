@@ -1,0 +1,65 @@
+<table id="show_goodtype"></table>
+<script type="text/javascript">
+$('#show_goodtype').datagrid({
+ 	url:'goodType.action',
+ 	queryParams:{op:'find'},//查询参数    	传入参数，默认查询可以用账号信息
+ 	pagination:true,//分页工具栏
+ 	singleSelect:true,//只能选中一行
+ 	pageSize:4,//初始化页面尺寸	
+ 	pageList:[2,4,6,8,10], //初始化页面尺寸的选择列表
+ 	toolbar: [{
+		iconCls: 'icon-add',
+		handler: function(){alert('edit')}
+	},'-',{
+		iconCls: 'icon-edit',
+		handler: function(){alert('help')}
+	},'-',{
+		iconCls: 'icon-search',
+		handler: function(){
+			//点击当前图标查询禁用的管理员
+			$('#show_goodtype').datagrid('load',{
+				op: 'find',
+				a_state:2
+				});
+		}
+	}],
+    columns:[[
+		{field:'t_id',title:'类型编号',width:100,align:'center'},
+		{field:'t_name',title:'类型名称',width:100,align:'center'},
+		{field:'t_disc',title:'类型描述',width:100,align:'center'},
+		{field:'t_parent',title:'上一级',width:100,align:'center'},
+		{field:'a_option',title:'操作',width:100,align:'center'//,
+			/*formatter: function(value,row,index){
+				if(row.a_state==1){
+					return '<a href="javascript:updateState('+row.a_id+')">禁用</a>';
+				}else{
+					return '<a href="javascript:updateState('+row.a_id+')">可用</a>';
+				}
+
+			}
+			*/
+		}
+    ]]
+});
+
+
+
+
+function updateState(aid){
+	$.get("admin.action",{op:'update',a_id:aid},function(data){
+		if(data==1){
+			//弹框提示
+			$.messager.show({
+				title:'温馨提示',
+				msg:'权限修改成功',
+				timeout:4000,
+				showType:'slide'
+			});
+			//重新加载表格
+			$('#show_goodtype').datagrid('reload');
+		}else{
+			$.messager.alert('错误提示','修改失败');
+		}
+	});
+}
+</script>
